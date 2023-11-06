@@ -32,20 +32,34 @@ async function run() {
   try {
 
     const blogCollection = client.db(BlogDB).collection("blogs");
+    const commentCollection = client.db(BlogDB).collection("comments");
 
 
-    // phones single data
+    // blog single data
     app.post('/api/v1/blogs', async (req, res) => {
       const blog = req.body;
       const result = await blogCollection.insertOne(blog);
       console.log(result);
       res.send(result);
     });
+    
+
 
     app.get('/api/v1/blogs', async (req, res) => {
-      const result = await blogCollection.find().toArray();
+      const cursor = blogCollection.find()
+      const result = await  cursor.toArray()
       res.send(result);
     });
+
+
+    // comment data post
+    app.post('/api/v1/user/comment', async (req, res) => {
+     const comment = (req.body);
+     const result = await commentCollection.insertOne(comment)
+     console.log(result);
+     res.send(result);
+    })
+
 
 
 
