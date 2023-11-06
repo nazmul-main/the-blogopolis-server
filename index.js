@@ -1,7 +1,7 @@
 
 const express = require('express')
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express()
 const port = process.env.PORT || 5001;
 require('dotenv').config();
@@ -49,6 +49,15 @@ async function run() {
       const cursor = blogCollection.find()
       const result = await  cursor.toArray()
       res.send(result);
+    });
+
+    /* get for ubpadteed */
+    app.get('/api/v1/blogs/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await blogCollection.findOne(query);
+      res.send(result);
+      
     });
 
 
