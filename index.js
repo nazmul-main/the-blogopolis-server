@@ -69,6 +69,12 @@ async function run() {
      res.send(result);
     })
 
+    app.get('/api/v1/user/comment', async (req, res) => {
+      const cursor = commentCollection.find()
+      const result = await  cursor.toArray()
+      res.send(result);
+    });
+
 
 
 
