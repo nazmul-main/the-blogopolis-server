@@ -90,13 +90,21 @@ async function run() {
 
     app.get('/api/v1/user/wishlist', async (req, res) => {
       let query = {};
-      if (req.query?.userEmail){
-        query = {userEmail: req.query.userEmail}
+      if (req.query?.email){
+        query = {email: req.query.email}
       }
       const cursor = wishlistCollection.find(query)
       const result = await  cursor.toArray()
       res.send(result);
     });
+
+    /* Delete */
+    app.delete('/api/v1/user/wishlist/:id', async (req, res) => {
+      const id = req.params.id
+      const query = { _id: new ObjectId(id) };
+      const result = await wishlistCollection.deleteOne(query);
+      res.send(result);
+    })
 
 
 
