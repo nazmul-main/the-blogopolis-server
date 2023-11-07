@@ -88,6 +88,16 @@ async function run() {
      res.send(result);
     });
 
+    app.get('/api/v1/user/wishlist', async (req, res) => {
+      let query = {};
+      if (req.query?.userEmail){
+        query = {userEmail: req.query.userEmail}
+      }
+      const cursor = wishlistCollection.find(query)
+      const result = await  cursor.toArray()
+      res.send(result);
+    });
+
 
 
     // Connect the client to the server	(optional starting in v4.7)
