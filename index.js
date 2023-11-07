@@ -106,6 +106,31 @@ async function run() {
       res.send(result);
     })
 
+    // update data
+    app.put('/api/v1/blogs/update/:id', async (req, res) => {
+      const updateBlog = req.body;
+      console.log(updateBlog);
+      const id = req.params.id;
+      const phone = req.body
+      console.log(id, phone);
+      const filter = { _id: new ObjectId(id) }
+      const option = { upsert: true }
+      const updatedPhone = {
+        $set: {
+          name: phone.name,
+          type: phone.type,
+          price: phone.price,
+          photo: phone.photo,
+          brand: phone.brand,
+          rating: phone.rating
+        }
+      }
+
+      const result = await blogCollection.updateOne(filter, updatedPhone, option);
+      res.send(result);
+      console.log(result);
+    })
+
 
 
     // Connect the client to the server	(optional starting in v4.7)
