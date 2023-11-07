@@ -33,6 +33,7 @@ async function run() {
 
     const blogCollection = client.db(BlogDB).collection("blogs");
     const commentCollection = client.db(BlogDB).collection("comments");
+    const wishlistCollection = client.db(BlogDB).collection("wishlists");
 
 
     // blog single data
@@ -52,7 +53,7 @@ async function run() {
     });
 
     /* get for ubpadteed */
-    app.get('/api/v1/blogs/:id', async (req, res) => {
+    app.get('/api/v1/update/blogs/:id', async (req, res) => {
       const id = req.params.id;
       const query = {_id: new ObjectId(id)}
       const result = await blogCollection.findOne(query);
@@ -76,6 +77,16 @@ async function run() {
     });
 
 
+
+
+    /* wishList data post */
+    app.post('/api/v1/user/wishlist' , async (req, res) => {
+      const wishlist = (req.body);
+      console.log(wishlist);
+     const result = await wishlistCollection.insertOne(wishlist)
+     console.log(result);
+     res.send(result);
+    });
 
 
 
