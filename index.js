@@ -108,25 +108,23 @@ async function run() {
 
     // update data
     app.put('/api/v1/blogs/update/:id', async (req, res) => {
-      const updateBlog = req.body;
-      console.log(updateBlog);
       const id = req.params.id;
-      const phone = req.body
-      console.log(id, phone);
+      const update = req.body
+      console.log(id, update);
       const filter = { _id: new ObjectId(id) }
       const option = { upsert: true }
-      const updatedPhone = {
+      const updatedBlog = {
         $set: {
-          name: phone.name,
-          type: phone.type,
-          price: phone.price,
-          photo: phone.photo,
-          brand: phone.brand,
-          rating: phone.rating
+          title: update.title,
+          img: update.img,
+          category: update.category,
+          short_description: update.short_description,
+          long_description: update.long_description,
+          currentTime: update.currentTime
         }
       }
 
-      const result = await blogCollection.updateOne(filter, updatedPhone, option);
+      const result = await blogCollection.updateOne(filter, updatedBlog, option);
       res.send(result);
       console.log(result);
     })
