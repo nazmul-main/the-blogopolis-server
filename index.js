@@ -11,7 +11,7 @@ require('dotenv').config();
 app.use(
   cors({
       origin: ['http://localhost:5173', 'https://the-blogopolis.web.app'],
-      credentials: true,
+     
   }),
 )
 app.use(express.json());
@@ -80,7 +80,7 @@ async function run() {
       const result = await  cursor.toArray()
       res.send(result);
     });
-
+cc
 
 
 
