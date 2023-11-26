@@ -51,11 +51,7 @@ async function run() {
     
 
 
-    app.get('/api/v1/blogs', async (req, res) => {
-      const cursor = blogCollection.find()
-      const result = await  cursor.toArray()
-      res.send(result);
-    });
+    
     
     /* get for ubpadteed */
     app.get('/api/v1/update/blogs/:id', async (req, res) => {
