@@ -17,7 +17,6 @@ app.use(
 app.use(express.json());
 
 const BlogDB = "my_blog_database_name";
-
 /* DB URI */
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.idkvt6k.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -98,11 +97,7 @@ async function run() {
       res.send(result);
     });
 
-    // app.get('api/v1//wishlist/details', async (req, res) => {
-    //   const cursor = wishlistCollection.find()
-    //   const result = await  cursor.toArray()
-    //   res.send(result);
-    // })
+  
 
     /* Delete */
     app.delete('/api/v1/user/wishlist/:id', async (req, res) => {
